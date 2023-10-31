@@ -23,6 +23,12 @@ def query_api(zip):
         data = None
     return data
 
+@app.route('/')
+def hello():
+    greet = '<h1>Hola messiés!</h1>'
+    link = '<p><a href="weather/08011">Comprova el temps a Barcelona</a></p>'
+    return greet + link
+
 @app.route('/weather/<zip>')
 def result(zip):
     # get the json file from the OpenWeather API
@@ -30,7 +36,7 @@ def result(zip):
     # construct a string using the json data items for temp and
     # description
     try:
-        text = resp["name"] + " temperature is " + str(resp["main"]["temp"]) + " degrees Fahrenheit with " + resp["weather"][0]["description"] + "."
+        text = resp["name"] + " temperature is " + str( round( (resp["main"]["temp"]-32)*5/9 , 2) ) + " degrees Celsius with " + resp["weather"][0]["description"] + "."
     except:
         text = "There was an error.<br>Did you include a valid U.S. zip code in the URL?"
     return text

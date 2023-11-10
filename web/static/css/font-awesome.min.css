@@ -1119,7 +1119,7 @@
 }
 
 .fa-caret-down:before {
-	    background-image: url("/static/iconos/down arrow white.png");
+	    background-image: url("/static/iconos/down-arrow-white.png");
     background-size: 15px 15px;
     position:relative;
     top:5px;

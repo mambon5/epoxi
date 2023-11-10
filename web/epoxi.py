@@ -5,6 +5,7 @@
 
 import requests
 from flask import Flask, render_template
+
 app = Flask(__name__)
 
 # this is not a real key
@@ -26,6 +27,11 @@ def query_api(zip):
 @app.route('/')
 def hello(lang="cat"):
     return render_template('index_cat.html', lang=lang)
+
+@app.route('/new')
+def nou(lang="cat"):
+    return render_template('index_new.html', lang=lang)
+
 
 @app.route('/weather/<zip>')
 def result(zip):

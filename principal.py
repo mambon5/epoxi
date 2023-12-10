@@ -13,19 +13,13 @@ f = open('static/language/text.json')
 # returns JSON object as 
 # a dictionary
 text = json.load(f)
-lang = "eng"
-# Iterating through the json
-# list
-print(text[lang]["ind_templ"]['titol'])
-print(text[lang]["ind_templ"]['lead'])
-
-
+lang = "cat"
 # Closing file
 f.close()
 
 # from modules import get_names, get_actor, get_id
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path="/static")
 app.secret_key = 'tO$&!|0wkamvVia0?n$NqIRVWOG'
 
 # Bootstrap-Flask requires this line
@@ -33,38 +27,39 @@ bootstrap = Bootstrap5(app)
 # Flask-WTF requires this line
 csrf = CSRFProtect(app)
 
+
+
+
 # with Flask-WTF, each web form is represented by a class
 # "NameForm" can change; "(FlaskForm)" cannot
 # see the route for "/" and "index.html" to see how this is used
 class NameForm(FlaskForm):
-    name = StringField(text[lang]["contact_form"]["nom"], 
+    # posant els paràmetres del formulari
+    name = StringField("", 
                         validators=[DataRequired(), Length(3, 40)])
-    email = EmailField(text[lang]["contact_form"]["email"], 
+    email = EmailField("", 
                     validators=[DataRequired(), Email()])
-    phone = StringField(text[lang]["contact_form"]["phone"], 
-                        validators=[DataRequired()])
-    descripcio = StringField(text[lang]["contact_form"]["descripcio"], 
+    phone = IntegerField("", 
+                       [InputRequired(),
+                       NumberRange(min=0, max=1000000000000, 
+                                   message=text[lang]["contact"]["contact_form"]["error_import"]) ])
+    descripcio = StringField("", 
                             validators=[DataRequired(), Length(3, 400)])
-    pressupost = IntegerField(text[lang]["contact_form"]["pressupost"], 
+    pressupost = IntegerField("", 
                             [ InputRequired(),
-        NumberRange(min=0, max=100000, message=text[lang]["contact_form"]["error_import"]) ])
-    submit = SubmitField(text[lang]["contact_form"]["submit_text"])
+        NumberRange(min=0, max=100000, message=text[lang]["contact"]["contact_form"]["error_import"]) ])
+    submit = SubmitField("")
 
     def __init__(self, lang, *args, **kwargs):
+        # actualitzant etiquetes del formulari segons l'idioma
         super().__init__(**kwargs)
-        self['name'].label = Label(self['name'].id, text[lang]["contact_form"]["nom"])
-        self['email'].label = Label(self['email'].id, text[lang]["contact_form"]["email"])
-        self['phone'].label = Label(self['phone'].id, text[lang]["contact_form"]["phone"])
-        self['descripcio'].label = Label(self['descripcio'].id, text[lang]["contact_form"]["descripcio"])
-        self['pressupost'].label = Label(self['pressupost'].id, text[lang]["contact_form"]["pressupost"])
-        self['submit'].label = Label(self['submit'].id, text[lang]["contact_form"]["submit_text"])
+        self['name'].label = Label(self['name'].id, text[lang]["contact"]["contact_form"]["nom"])
+        self['email'].label = Label(self['email'].id, text[lang]["contact"]["contact_form"]["email"])
+        self['phone'].label = Label(self['phone'].id, text[lang]["contact"]["contact_form"]["phone"])
+        self['descripcio'].label = Label(self['descripcio'].id, text[lang]["contact"]["contact_form"]["descripcio"])
+        self['pressupost'].label = Label(self['pressupost'].id, text[lang]["contact"]["contact_form"]["pressupost"])
+        self['submit'].label = Label(self['submit'].id, text[lang]["contact"]["contact_form"]["submit_text"])
         # self['pressupost'].message = text[lang]["contact_form"]["error_import"]
-
-
-
-    def set_names(name):
-        name.label = "Holi"
-    
 
     def validate_phone(form, field):
         if len(field.data) > 16:
@@ -92,7 +87,6 @@ def index():
     # you must tell the variable 'form' what you named the class, above
     # 'form' is the variable name used in this template: index.html
     form = NameForm(lang)
-    # form.set_names()
     # form.name.label = "adeu"
     message = ""
     # if form.validate_on_submit():

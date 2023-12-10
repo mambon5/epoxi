@@ -15,13 +15,65 @@ Epoxiseria
 -->
 <button><a href="/?lang=cat">Cat</a></button><button><a href="/?lang=eng">Eng</a></button><button><a href="/?lang=esp">Esp</a></button>
 
+
+
 <div class="container">
   <div class="row">
     <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
 
       <h1 class="pt-5 pb-2">{{  titol  }}</h1>
 
+      <div align="middle">
+
+        {% set n = text["images"] | length %}
+        {{ n }}
+        {% set n = text["images"] | length %}
+
+        
+        <h3> {{ 
+          
+          text["images"]['sec_1']['nom']
+    
+        }} </h3>
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-09-25 15.15.18.jpg') }}" align="middle" />
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-02 17.11.17.jpg') }}" align="middle" />
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-04 14.44.50.jpg') }}" align="middle" />
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-09 12.01.51.jpg') }}" align="middle" />
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-09 12.15.17.jpg') }}" align="middle" />
+        <h3>Preparació del epoxy</h3>
+        <div class="zoom-in">
+          <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-18 11.44.45.jpg') }}" align="middle" />
+        </div>
+        
+        <h3>Resultats epoxy peça blava i daurada</h3>
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-18 16.21.40.jpg') }}" align="middle" />
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-18 16.26.23.jpg') }}" align="middle" />
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-18 16.26.28.jpg') }}" align="middle" />
+        
+        <h3>Resultats epoxy marbrejat blanc i daurat</h3>
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-23 12.11.09.jpg') }}" align="middle" />
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-23 18.33.30.jpg') }}" align="middle" />
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-24 15.18.29.jpg') }}" align="middle" />
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-24 15.18.44.jpg') }}" align="middle" />
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-24 15.19.06.jpg') }}" align="middle" />
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-31 13.11.46.jpg') }}" align="middle" />
+        <img  class="mig_pag" src=" {{ url_for('static', filename='images/2023-10-23 18.57.18.jpg') }}" align="middle" />
+
+          </div>
+
       <p class="lead">{{ text["ind_templ"]['titol'] }}</p>
+
+      <div>
+        <p>{{ text["ind_templ"]['que_fem']["gene"] }}</p>
+        <ul>
+          {% for elem in text["ind_templ"]["que_fem"]["llista"] %}
+          <li>{{ text["ind_templ"]["que_fem"]["llista"][elem] }}</li>
+          {% endfor %}
+        </ul>
+        
+      </div>
+
+      <h3>{{ text["contact"]["titol"] }}</h3>
 
       {{ render_form(form) }}
 

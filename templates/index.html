@@ -13,8 +13,11 @@ Epoxiseria
 	https://github.com/helloflask/bootstrap-flask
 	https://bootstrap-flask.readthedocs.io/
 -->
+<div class="top_nav_fix">
 <button><a href="/?lang=cat">Cat</a></button><button><a href="/?lang=eng">Eng</a></button><button><a href="/?lang=esp">Esp</a></button>
 
+<button><a href="#fotos">Fotos</a></button><button><a href="#contacte">Contacte</a></button><button><a href="#serveis">Serveis</a></button>
+</div>
 
 
 <div class="container">
@@ -23,7 +26,7 @@ Epoxiseria
 
       <h1 class="pt-5 pb-2">{{  titol  }}</h1>
 
-      <div align="middle">
+      <div align="middle" id="fotos">
 
 
         {%for key in text["images"]%}   
@@ -36,12 +39,12 @@ Epoxiseria
 
         {%endfor%} 
 
-        
+      </div>
         
 
       <p class="lead">{{ text["ind_templ"]['titol'] }}</p>
 
-      <div>
+      <div id="serveis">
         <p>{{ text["ind_templ"]['que_fem']["gene"] }}</p>
         <ul>
           {% for elem in text["ind_templ"]["que_fem"]["llista"] %}
@@ -51,7 +54,7 @@ Epoxiseria
         
       </div>
 
-      <h3>{{ text["contact"]["titol"] }}</h3>
+      <h3 id="contacte">{{ text["contact"]["titol"] }}</h3>
 
       {{ render_form(form) }}
 

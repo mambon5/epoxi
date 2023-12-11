@@ -7,14 +7,16 @@
     position: relative;
   }
 
-  .zoom-in img {
+  .zoom-in  {
     transition: transform 0.3s ease;
   }
 
-  .zoom-in:hover img {
+  .zoom-in:hover  {
     transform: scale(2); /* You can adjust the scale factor for desired zoom level */
+    z-index: 3;
   }
 
-  .zoom-in img:not(:hover) {
+  .zoom-in: not(:hover) {
     transform: scale(1);
+    z-index: -1;
   }

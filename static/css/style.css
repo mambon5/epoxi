@@ -33,9 +33,10 @@ body {
   }
 
 .top_nav_fix {
+    background-color: rgba(255,240,188,0.5);
     position:fixed;
     top:0;
-    z-index: 3
+    z-index: 2;
 
 }
 
@@ -65,6 +66,7 @@ body {
   touch-action: manipulation;
   vertical-align: baseline;
   white-space: nowrap;
+  
 }
 
 .button-48:before {
